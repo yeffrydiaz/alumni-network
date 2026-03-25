@@ -21,7 +21,7 @@ export default function JobBoard() {
       setError('');
       try {
         const { data } = await api.get('/jobs');
-        setJobs(data);
+        setJobs(data.data || []);
       } catch {
         setError('Failed to load job postings.');
       } finally {

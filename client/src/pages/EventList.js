@@ -20,7 +20,7 @@ export default function EventList() {
       setError('');
       try {
         const { data } = await api.get('/events');
-        setEvents(data);
+        setEvents(data.data || []);
       } catch {
         setError('Failed to load events.');
       } finally {

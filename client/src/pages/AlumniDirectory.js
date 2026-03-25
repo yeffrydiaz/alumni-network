@@ -18,7 +18,7 @@ export default function AlumniDirectory() {
       setError('');
       try {
         const { data } = await api.get('/users');
-        setAlumni(data);
+        setAlumni(data.data || []);
       } catch (err) {
         setError('Failed to load alumni. Please try again.');
       } finally {
