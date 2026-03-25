@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import api from '../utils/api';
@@ -13,7 +13,7 @@ export default function EventDetail() {
   const [actionLoading, setActionLoading] = useState(false);
   const [actionMsg, setActionMsg] = useState('');
 
-  async function fetchEvent() {
+  const fetchEvent = useCallback(async () => {
     setLoading(true);
     setError('');
     try {
@@ -24,12 +24,11 @@ export default function EventDetail() {
     } finally {
       setLoading(false);
     }
-  }
+  }, [id]);
 
   useEffect(() => {
     fetchEvent();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  }, [fetchEvent]);
 
   const isAttending =
     user &&
