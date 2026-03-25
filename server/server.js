@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const rateLimit = require('express-rate-limit');
 
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/users');
@@ -13,6 +14,24 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Strict rate limit for auth endpoints (brute-force protection)
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 20,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: 'Too many requests, please try again later' },
+});
+
+// General API rate limit
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 200,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { message: 'Too many requests, please try again later' },
+});
+
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => console.log('MongoDB connected'))
@@ -21,10 +40,10 @@ mongoose
     process.exit(1);
   });
 
-app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/jobs', jobRoutes);
-app.use('/api/events', eventRoutes);
+app.use('/api/auth', authLimiter, authRoutes);
+app.use('/api/users', apiLimiter, userRoutes);
+app.use('/api/jobs', apiLimiter, jobRoutes);
+app.use('/api/events', apiLimiter, eventRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
