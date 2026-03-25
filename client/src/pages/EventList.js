@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import api from '../utils/api';
 
-const CATEGORIES = ['networking', 'career', 'social', 'workshop', 'reunion', 'other'];
-const STATUSES = ['upcoming', 'ongoing', 'past', 'cancelled'];
+const CATEGORIES = ['networking', 'workshop', 'reunion', 'career fair', 'other'];
+const STATUSES = ['upcoming', 'ongoing', 'completed', 'cancelled'];
 
 export default function EventList() {
   const { token } = useAuth();

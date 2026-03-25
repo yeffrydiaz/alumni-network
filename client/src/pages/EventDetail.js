@@ -203,7 +203,7 @@ export default function EventDetail() {
           )}
 
           <div className="d-flex gap-3 flex-wrap">
-            {event.status !== 'cancelled' && event.status !== 'past' && (
+            {event.status !== 'cancelled' && event.status !== 'completed' && (
               isAttending ? (
                 <button
                   className="btn btn-outline-danger px-4"

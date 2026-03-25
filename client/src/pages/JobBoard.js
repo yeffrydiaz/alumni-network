@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import api from '../utils/api';
 
-const JOB_TYPES = ['full-time', 'part-time', 'contract', 'internship', 'remote'];
+const JOB_TYPES = ['full-time', 'part-time', 'contract', 'remote'];
 const JOB_STATUSES = ['open', 'closed'];
 
 export default function JobBoard() {

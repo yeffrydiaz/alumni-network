@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import api from '../utils/api';
 
-const CATEGORIES = ['networking', 'career', 'social', 'workshop', 'reunion', 'other'];
+const CATEGORIES = ['networking', 'workshop', 'reunion', 'career fair', 'other'];
 
 export default function CreateEvent() {
   const navigate = useNavigate();

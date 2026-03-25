@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import api from '../utils/api';
 
-const JOB_TYPES = ['full-time', 'part-time', 'contract', 'internship', 'remote'];
+const JOB_TYPES = ['full-time', 'part-time', 'contract', 'remote'];
 
 export default function CreateJob() {
   const navigate = useNavigate();
